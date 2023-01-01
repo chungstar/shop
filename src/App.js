@@ -4,6 +4,7 @@ import './App.css';
 import bg from './img/bg.png';
 import data from './data.js'
 import {Route, Route, Link} from 'react-router-dom'
+import Detail from './routes/Detail.js'
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
           </Row>
         </>
         }/>
-        <Route path="/detail" element={<div>상세페이지임</div>}/>
+        <Route path="/detail" element={ <Detail/> } />
         <Route path="/about" element={<div>어바웃페이지임</div>} />
       </Routes>
 
