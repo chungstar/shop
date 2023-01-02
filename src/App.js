@@ -3,12 +3,13 @@ import { useState } from 'react';
 import './App.css';
 import bg from './img/bg.png';
 import data from './data.js'
-import {Route, Route, Link} from 'react-router-dom'
+import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/Detail.js'
 
 function App() {
 
   let [shoes] = useState(data)
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -17,15 +18,12 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">GyuShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#cart">Cart</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/') }}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       
-      <Link to="/">홈</Link>
-      <Link to="/detail">상세</Link>
-
       <Routes>
         <Route path="/" element={
         <>
@@ -42,13 +40,37 @@ function App() {
         </>
         }/>
         <Route path="/detail" element={ <Detail/> } />
-        <Route path="/about" element={<div>어바웃페이지임</div>} />
+        <Route path="/about" element={ <About/> }>
+          <Route path="member" element={ <div>멤버</div> } />
+          <Route path="location" element={ <div>위치정보</div> } />
+        </Route>
+        <Route path="/event" element={ <EventPage/> }>
+          <Route path="one" element={ <div>첫 주문시 양배추즙 서비스</div> } />
+          <Route path="two" element={ <div>생일기념 쿠폰 받기</div> } />
+        </Route>
+        <Route path="*" element={<div>404</div>} />
       </Routes>
 
       
     </div>
   );
 }
+function About(){
+  return (
+    <div>
+      <h4>회사정보</h4>
+      <Outlet></Outlet>
+    </div>
+  )
+}
+function EventPage(){
+  return (
+    <div>
+      <h4>오늘의 이벤트</h4>
+      <Outlet></Outlet>
+    </div>
+  )
+} 
 
 function Card(props){
   return (
