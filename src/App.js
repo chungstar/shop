@@ -9,7 +9,7 @@ import axios from 'axios'
 
 function App() {
 
-  let [shoes] = useState(data)
+  let [shoes, setShoes] = useState(data)
   let navigate = useNavigate();
 
   return (
@@ -40,10 +40,12 @@ function App() {
           </Row>
           <button onClick={()=>{
             axios.get('https://codingapple1.github.io/shop/data2.json')
-            .then((ㅎ)=>{
-              console.log(ㅎ.data)})
-            .catch(()=>{console.log('실패다')})
-          }}>버튼</button>
+            .then((i)=>{
+              console.log(i.data)
+              let copy = [...shoes, ...i.data];
+              setShoes(copy);
+            })
+          }}>더보기</button>
         </>
         }/>
         <Route path="/detail/:id" element={ <Detail shoes={shoes}/> } />
