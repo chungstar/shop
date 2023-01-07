@@ -5,6 +5,7 @@ import bg from './img/bg.png';
 import data from './data.js'
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/Detail.js'
+import axios from 'axios'
 
 function App() {
 
@@ -37,6 +38,12 @@ function App() {
               })
             }
           </Row>
+          <button onClick={()=>{
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((ㅎ)=>{
+              console.log(ㅎ.data)})
+            .catch(()=>{console.log('실패다')})
+          }}>버튼</button>
         </>
         }/>
         <Route path="/detail/:id" element={ <Detail shoes={shoes}/> } />
