@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom"
 import { Nav } from "react-bootstrap"
 
 function Detail(props){
-  
-  let [count, setCount]=useState(0)
+  let [fade2, setFade2] = useState('')
   let [alert, setAlert]=useState(true)
-  let [num, setNum]=useState('')
   let {id} = useParams();
   let [탭,탭변경] = useState(0)
   let item = props.shoes.find(function(x){
@@ -20,27 +18,24 @@ function Detail(props){
       clearTimeout(a)
     }
     },[])
-    useEffect(()=>{
-      if (isNaN(num) == true){
-        alert('그러지마세요')
-      }
-    }, [num])
-  
+  useEffect(()=>{
+    setFade2('end')
+    return ()=>{
+      setFade2('')
+    }
+  },[])
     return (
-      <div className="container">
+      <div className={"container start "+ fade2}>
         
         { alert == true
         ? <div className="alert alert-warning">
             2초 이내 구매시 할인
           </div>
         : null }
-        {count}
-        <button onClick={()=>{ setCount(count+1) }}>?</button>
         <div className="row">
           <div className="col-md-6">
             <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
           </div>
-          <input onChange={(e)=>{ setNum(e.target.value) }} />
           <div className="col-md-6 mt-4">
             <h4 className="pt-5">{item.title}</h4>
             <p>{item.content}</p>
@@ -75,7 +70,7 @@ function Detail(props){
         setFade('')
       }
     },[탭])
-    
+
     return (<div className={'start '+fade}>
         {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
       </div>)
