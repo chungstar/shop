@@ -6,8 +6,7 @@ import data from './data.js'
 import {Routes, Route, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/Detail.js'
 import axios from 'axios'
-
-export let Context1= createContext()
+import Cart from './routes/Cart.js'
 
 function App() {
 
@@ -53,9 +52,10 @@ function App() {
         </>
         }/>
         <Route path="/detail/:id" element={
-          <Context1.Provider value = {{재고,shoes}}>
             <Detail shoes={shoes}/> 
-          </Context1.Provider>
+        } />
+        <Route path="/cart" element={
+          <Cart/>
         } />
         <Route path="/about" element={ <About/> }>
           <Route path="member" element={ <div>멤버</div> } />

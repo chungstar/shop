@@ -2,13 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { Nav } from 'react-bootstrap'
 
-import { Context1 } from './../App.js'
-
-
 function Detail(props){
-
-  let {재고, shoes} = useContext(Context1)
-
+  
   let [fade2, setFade2] = useState('')
   let [alert, setAlert]=useState(true)
   let {id} = useParams();
