@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import './App.css';
 import bg from './img/bg.png';
 import data from './data.js'
@@ -9,6 +9,17 @@ import axios from 'axios'
 import Cart from './routes/Cart.js'
 
 function App() {
+
+  useEffect(()=>{
+    if(localStorage.getItem('watched') == null){
+      localStorage.setItem('watched',JSON.stringify([]))
+    }
+    return null
+  },[])
+
+  let obj = {name:'kim'}
+  localStorage.setItem('data',  JSON.stringify(obj))
+  let outout = localStorage.getItem('data')
 
   let [shoes, setShoes] = useState(data)
   let [재고] = useState([10,11,12])
